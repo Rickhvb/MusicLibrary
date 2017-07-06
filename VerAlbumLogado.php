@@ -14,7 +14,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-            echo "Usuarios"
+            echo "Album"
         ?>
         <script src="js/bootstrap.min.js"></script>
     </body>
