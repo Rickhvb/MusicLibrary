@@ -155,7 +155,11 @@ else{
                     else{
                         //Executa a classe cadastro
                         $conectar=new Operacoes;
+<<<<<<< HEAD
                         if ($nivel==="Administrador"){
+=======
+                        if ($nivel="Administrador"){
+>>>>>>> e4b48a3aed76faa29ac9e1a873ad8ef17a1faabe
                             $nivel=1;
                         }else{
                             $nivel=2;

@@ -87,6 +87,18 @@ and open the template in the editor.
             <h1 class='titulo' style='font-size: 40px; float:center; width: 200px; '>Editar Álbum</h1>
             
             <?php
+<<<<<<< HEAD
+=======
+            $host = "localhost";
+                    $username = "root";
+                    $password = "123";
+                    $db = "MusicLibrary";
+
+                    mysql_connect($host,$username,$password) or die("Impossível conectar ao banco."); 
+
+                    @mysql_select_db($db) or die("Impossível conectar ao banco"); 
+
+>>>>>>> e4b48a3aed76faa29ac9e1a873ad8ef17a1faabe
                     $result=mysql_query("SELECT a.id,a.nome,a.imagem,a.ano,ar.nome as artista from album a,artista ar where a.artista=ar.id and a.id='$acao'") or die("Impossível executar a query"); 
                     $arquivos = mysql_fetch_array($result);
                     $pesquisamusicas=mysql_query("SELECT *from musica WHERE album='$acao'") or die("Impossível executar a query"); 

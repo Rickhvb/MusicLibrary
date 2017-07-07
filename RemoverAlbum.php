@@ -88,7 +88,19 @@ and open the template in the editor.
                 <h1 for="login" class="titulo">Confirmação de exclusão do Álbum </h1>
                 <br><br>
                 <?php
+<<<<<<< HEAD
                     $codigoalbum=$_GET["acao"];
+=======
+                    $host = "localhost";
+                    $username = "root";
+                    $password = "123";
+                    $db = "MusicLibrary";
+                    $codigoalbum=$_GET["acao"];
+                    mysql_connect($host,$username,$password) or die("Impossível conectar ao banco."); 
+
+                    @mysql_select_db($db) or die("Impossível conectar ao banco"); 
+
+>>>>>>> e4b48a3aed76faa29ac9e1a873ad8ef17a1faabe
                     $result=mysql_query("SELECT a.id,a.nome,a.ano,a.imagem,ar.nome as artista FROM artista ar, album a"
                             . " WHERE a.artista=ar.id AND a.id='$acao' ") or die("Impossível executar a query"); 
                     $arquivos = mysql_fetch_array($result);

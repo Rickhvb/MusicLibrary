@@ -82,6 +82,18 @@ and open the template in the editor.
                 <label for="login" class="titulo">Lista de Músicas </label>
                 <br><br><br>
                 <?php
+<<<<<<< HEAD
+=======
+                    $host = "localhost";
+                    $username = "root";
+                    $password = "123";
+                    $db = "MusicLibrary";
+
+                    mysql_connect($host,$username,$password) or die("Impossível conectar ao banco."); 
+
+                    @mysql_select_db($db) or die("Impossível conectar ao banco"); 
+
+>>>>>>> e4b48a3aed76faa29ac9e1a873ad8ef17a1faabe
                     $result=mysql_query("SELECT m.id,m.numero,ar.nome as artista, m.nome as musica,m.duracao,m.compositor,a.nome "
                             . "FROM musica m,album a, artista ar WHERE a.id=m.album AND ar.id=a.artista") 
                             or die("Impossível executar a query"); 

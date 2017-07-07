@@ -84,6 +84,17 @@ and open the template in the editor.
                 echo '<label for="login" class="titulo">Resultado da sua Busca pela palavra "'.$palavra.'" </label>';
                 echo '<br><br><br>';
                 
+<<<<<<< HEAD
+=======
+                    $host = "localhost";
+                    $username = "root";
+                    $password = "123";
+                    $db = "MusicLibrary";
+
+                    mysql_connect($host,$username,$password) or die("Impossível conectar ao banco."); 
+
+                    @mysql_select_db($db) or die("Impossível conectar ao banco"); 
+>>>>>>> e4b48a3aed76faa29ac9e1a873ad8ef17a1faabe
                     $pesquisamusica=mysql_query("SELECT m.id,m.numero,ar.nome as artista, m.nome as musica,m.duracao,m.compositor,a.nome "
                             . "FROM musica m,album a, artista ar WHERE a.id=m.album AND ar.id=a.artista AND m.nome LIKE '%$palavra%'") or die("Impossível executar a query"); 
                     $pesquisaartista=mysql_query("SELECT * FROM artista WHERE nome LIKE '%$palavra%'") or die("Impossível executar a query"); 

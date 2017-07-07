@@ -91,6 +91,18 @@ and open the template in the editor.
             <br>
                 
                  <?php
+<<<<<<< HEAD
+=======
+                    $host = "localhost";
+                    $username = "root";
+                    $password = "123";
+                    $db = "MusicLibrary";
+
+                    mysql_connect($host,$username,$password) or die("Impossível conectar ao banco."); 
+
+                    @mysql_select_db($db) or die("Impossível conectar ao banco"); 
+
+>>>>>>> e4b48a3aed76faa29ac9e1a873ad8ef17a1faabe
                     $result=mysql_query("SELECT *FROM usuario where id='$acao'") or die("Impossível executar a query"); 
                     $arquivos = mysql_fetch_array($result);
                 echo '<form action="?acao=editarUsuario" method="post" enctype="multipart/form-data" >';    

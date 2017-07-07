@@ -87,21 +87,33 @@ and open the template in the editor.
           </ol>
           <div class="carousel-inner" style="height:300px;">
             <div class="item active" >
+<<<<<<< HEAD
                 <img src="img\Fundo0.png" style="width:100%; height:70%;" class="img-responsive">
+=======
+                <img src="\MusicLibrary\img\Fundo0.png" style="width:100%; height:70%;" class="img-responsive">
+>>>>>>> e4b48a3aed76faa29ac9e1a873ad8ef17a1faabe
               <div class="container">
                 <div class="carousel-caption">
                 </div>
               </div>
             </div>
             <div class="item">
+<<<<<<< HEAD
                 <img src="img\Fundo1.png" style="width:100%; height:70%;" class="img-responsive">
+=======
+                <img src="\MusicLibrary\img\Fundo1.png" style="width:100%; height:70%;" class="img-responsive">
+>>>>>>> e4b48a3aed76faa29ac9e1a873ad8ef17a1faabe
               <div class="container">
                 <div class="carousel-caption">
                 </div>
               </div>
             </div>
             <div class="item">
+<<<<<<< HEAD
               <img src="img\Fundo2.png" style="width:100%; height:70%;" class="img-responsive">
+=======
+              <img src="\MusicLibrary\img\Fundo2.png" style="width:100%; height:70%;" class="img-responsive">
+>>>>>>> e4b48a3aed76faa29ac9e1a873ad8ef17a1faabe
               <div class="container">
                 <div class="carousel-caption">
                 </div>

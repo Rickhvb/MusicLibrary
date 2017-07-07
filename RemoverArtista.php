@@ -88,7 +88,19 @@ and open the template in the editor.
                 <h4 for="login" class="frm">Isso removerá inclusive os respectivos álbuns e músicas </h4>
                 
                 <?php
+<<<<<<< HEAD
                     $codigoartista=$_GET["acao"];
+=======
+                    $host = "localhost";
+                    $username = "root";
+                    $password = "123";
+                    $db = "MusicLibrary";
+                    $codigoartista=$_GET["acao"];
+                    mysql_connect($host,$username,$password) or die("Impossível conectar ao banco."); 
+
+                    @mysql_select_db($db) or die("Impossível conectar ao banco"); 
+
+>>>>>>> e4b48a3aed76faa29ac9e1a873ad8ef17a1faabe
                     $result=mysql_query("SELECT *FROM artista WHERE id='$acao' ") or die("Impossível executar a query"); 
                     $arquivos = mysql_fetch_array($result);
                 echo "<div style='width: 1100px; height:500px;>";

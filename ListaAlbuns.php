@@ -84,6 +84,18 @@ and open the template in the editor.
                 <br><br><br>
                 
                 <?php
+<<<<<<< HEAD
+=======
+                    $host = "localhost";
+                    $username = "root";
+                    $password = "123";
+                    $db = "MusicLibrary";
+
+                    mysql_connect($host,$username,$password) or die("Impossível conectar ao banco."); 
+
+                    @mysql_select_db($db) or die("Impossível conectar ao banco"); 
+
+>>>>>>> e4b48a3aed76faa29ac9e1a873ad8ef17a1faabe
                     $result=mysql_query("SELECT a.id,a.nome,ar.nome as artista,a.ano,a.imagem FROM album a, artista ar WHERE ar.id=a.artista") or die("Impossível executar a query"); 
                     echo "<div class='table-responsive'>";
                     echo "<table class='table table-striped' >";
