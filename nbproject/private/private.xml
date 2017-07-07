@@ -2,36 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/ListaAlbuns.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/controller/Operacoes.class.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/ListaAlbunsLogado.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/ListaArtistasLogado.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/controller/header.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/EditarUsuario.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/RemoverUsuario.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/ListaMusicasLogado.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/UsuarioLogado.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/controller/Usuario.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/RemoverArtista.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/EditarArtista.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/AdminLogado.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/index.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/RemoverAlbum.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/VerArtistaLogado.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/Home.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/ListaMusicas.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/ListaArtistas.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/PesquisaEspecial.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/ListaUsuarios.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/InserirArtista.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/EditarAlbum.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/InserirAlbum.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/Cadastro.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/VerAlbumLogado.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/VerAlbum.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/VerArtista.php</file>
-            <file>file:/C:/WebServer/Apache2.2/htdocs/MusicLibrary/Pesquisa.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
