@@ -1,13 +1,12 @@
 <?php
 include("controller/header.php");
-$idExcluir="1";
-$arquivos="";
 if(isset($logado)){
     $mostrar= "Logado como $exibicao ";
 }
 else{
-$mostrar= "Logado como $exibicao ";
-include("Home.php");
+    $exibicao="Visitante";
+    $mostrar= "Logado como $exibicao ";
+    include("Home.php");
 }
 ?>
 <!DOCTYPE html>
@@ -20,7 +19,7 @@ and open the template in the editor.
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-        <title>Detalhe Album</title>
+        <title>Editar Artista</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link href="css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
@@ -72,89 +71,63 @@ and open the template in the editor.
           </div>
         </div><!-- /container -->
         </div><!-- /navbar wrapper -->
-      
+     
         <div class="container marketing"  id="fundo" style=" height: 150px;">
-
+        <div class="row">    
         <!-- Three columns of text below the carousel -->
-        <div class="row">
-            <div id="centralizar" style="width:90%; margin:auto; height: 70%;">
-                <br><br><br><br><br>
-                <label for="login" class="titulo">Detalhes do Álbum </label>
-                <br><br>
-                <?php
-                    $host = "localhost";
+        
+        <div id="login"  style="width:30%; margin:auto; height: 70%;">
+            <br><br><br><br>
+            <? if(strlen($msg)==31): ?>
+            <div id="confirmacao"> <?php echo $msg; ?> </div>
+            <? else: ?>
+            <div id="erro"> <?php echo $msg; ?> </div>
+            <? endif; ?>
+            <label for="login" class="titulo">Editar Artista/Banda </label>
+            <br>
+            <?php
+            $host = "localhost";
                     $username = "root";
                     $password = "123";
                     $db = "MusicLibrary";
-
                     mysql_connect($host,$username,$password) or die("Impossível conectar ao banco."); 
-
                     @mysql_select_db($db) or die("Impossível conectar ao banco"); 
-
-                    $result=mysql_query("SELECT a.id,a.nome,a.ano,a.imagem,ar.nome as artista FROM artista ar, album a"
-                            . " WHERE a.artista=ar.id AND a.id='$acao' ") or die("Impossível executar a query"); 
+                    $result=mysql_query("SELECT *from artista where id='$acao'") or die("Impossível executar a query"); 
                     $arquivos = mysql_fetch_array($result);
-                    $pesquisamusicas=mysql_query("SELECT *from musica WHERE album='$acao'") or die("Impossível executar a query"); 
-                    
-                echo "<div style='width: 1100px; height:600px;'>";
-                echo "<div style='width: 500px; float:left;'>";
-                echo "<h1 class='titulo' style='font-size: 70px;' >";
-                echo $arquivos['nome'];
-                echo "</h1>"; 
-                echo "<h3 style='font-size: 40px;'>";
-                echo $arquivos['artista'];
-                echo "</h3>";
-                echo "<h3 style='font-size: 20px;'>";
-                echo $arquivos['ano'];
-                echo "</h3>";
-                echo "<h1 class='titulo' style='font-size: 35px; float:center; width: 30px; ' >";
-                echo "Faixas";
-                echo "</h1>";
+                echo "<form action='?acao=atualizarArtista' method='post' enctype='multipart/form-data' >";
+                echo "</label><input type='hidden' class='form-control mb-2 mr-sm-2 mb-sm-0' type='text' name='id' value='".$arquivos['ID']."'/>";
+                echo "<div class='frm'>";
+                echo    "<label for='artista'>Artista/Banda: </label><input class='form-control mb-2 mr-sm-2 mb-sm-0' type='text' name='nome' value='".$arquivos['nome']."'/>";
                 echo "</div>";
+                echo "<div class='frm'>";
+                echo    "<label for='album'>Gênero: </label><input class='form-control mb-2 mr-sm-2 mb-sm-0' type='text' name='genero' value='".$arquivos['genero']."'/>";
+                echo "</div>";
+                echo "<div class='frm'>";
+                echo    "<label for='album'>Descrição: </label><input class='form-control mb-2 mr-sm-2 mb-sm-0' type='text' name='descricao' value='".$arquivos['descricao']."'/>";
+                echo "</div>";
+                echo    "<div class='frm' style='width:800px; height:100px;'>";
+                echo    "<div class='frm' style='width:200px; height:100px; float:left;'>";
+                echo    "<input type='hidden' name='size' value='1000000'>";
+                echo    "<td align='left'><img src='img/".$arquivos['imagem']."' height='200' width='200' ></td>";
+                echo    "</div>";
+                echo    "<div class='frm' style='width:400px; height:100px; float:left;'>";
+                echo    "<input type='hidden' name='size' value='1000000'>";
+                echo    "<label for='imagem'>Alterar Imagem: </label><input type='file' id='diretorio' name='imagem'/>";
+                echo    "</div>";
+                echo    "</div>";
+                echo '<br><br><br><br><br><br><br>';
+                echo    "<div class='frm'>";
+                echo    "<input class='btn btn-success btn-lg btn-default' type='submit' value='Salvar'/>";
+                echo    "   <input class='btn btn-warning btn-lg btn-default' type='reset' value='Limpar'/>";
+                echo    "</div>";
                 
-                $rows = array();
-                while($row = mysql_fetch_array($pesquisamusicas))
-                    $rows[] = $row;
-                echo "<div style=' width:500px; height:500px; float:right;'>";
-                echo "<img src='img/".$arquivos['imagem']."' height='400' width='400' />";
-                echo "</div>";
-                echo "<div class='table-responsive' style='float:left; width:600px;'>";
-                echo "<table class='table table-striped' style='float:left;'>";
-                    echo "<thead>";
-                    echo "<tr>";
-                    echo   "<th class='frm'>Nº Faixa</th>";
-                    echo   "<th class='frm'>Título</th>";
-                    echo   "<th class='frm'>Duração</th>";
-                    echo   "<th class='frm'>Compositor</th>";
-                    echo "</tr>";
-                    echo "</thead>";
-                    echo "<tbody>";
-                foreach($rows as $row){ 
-                    $enumero = stripslashes($row['numero']);
-                    $enome = stripslashes($row['nome']);
-                    $eduracao = stripslashes($row['duracao']);
-                    $ecompositor = stripslashes($row['compositor']);
-                    echo "<tr data-target='#myModal' id='delete-row' data-toggle='modal'>";
-                        echo "<td align='left'>".$enumero."</td>";    
-                        echo "<td align='left' width='1000px'>".$enome."</td>";
-                        echo "<td align='left'>".$eduracao."</td>";
-                        echo "<td align='left' width='1000px'>".$ecompositor."</td>";
-                        echo "</tr>";
-                }
-                echo "</tbody>";
-                echo "</table>";
+                echo    "</form>";
                 
-                echo "<br><br><br><br>";
-                echo "</div>";
-                echo "</div>";
-                ?>
-                
-            </div>
-        </div><!-- /.row -->
-        
-        <div style="width: 1000px;">
-        <div style="width: 500px; float: right;"><a  class="btn btn-success btn-lg btn-default" href="ListaAlbunsLogado.php">Voltar</a></div>
+            ?>
+            <br>
+            <a class="btn btn-danger btn-lg btn-default"  href="ListaArtistasLogado.php">Cancelar</a>
         </div>
+        </div><!-- /.row -->
         <hr class="featurette-divider">
         <!-- FOOTER -->
         <footer>
@@ -172,11 +145,8 @@ and open the template in the editor.
         </footer>
         </div><!-- /.container -->
               <!-- script references -->
-                      <script src="js/jquery.js"></script>
+                      <script src="js/jquery.mask.js"></script>
+                      <script src="js/jquery.js" type="text/javascript"></script>
                       <script src="js/bootstrap.min.js"></script>
-                      
     </body>
 </html>
-
-
-

@@ -14,9 +14,47 @@ body {
   padding-bottom: 40px;
   color: #5a5a5a;
 }
+.titulo{
+    font-family: Oswald; 
+    font-size: 30px; 
+    font-weight: bold; 
+    color: black;
+}
 
+#erro{
+    font-family: Oswald; 
+    font-size: 20px; 
+    font-weight: bold; 
+    color: red;
+}
+
+#confirmacao{
+    font-family: Oswald; 
+    font-size: 20px; 
+    font-weight: bold; 
+    color: blue;
+}
+
+.frm{
+    font-family: "Oswald";
+    font-style: normal;
+    font-size: 20px;
+    padding: 10px;
+}
+
+#login{
+    width: 400px;
+    margin: 0 auto;
+    top: 250px;
+}
+#login label{
+    display: block;
+}
+#preencher{
+    width: 250px;
+}
 #centralizar{ text-align: center }
-#fundo { background-color: #E6E6E6}
+#fundo { background-color: #E6E6E6;}
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 

@@ -1,9 +1,13 @@
 <?php
 include("controller/header.php");
-$idExcluir="1";
+$idexcluir="1";
 $arquivos="";
 if(isset($logado)){
+    if($nivel=="usuario"){
+        include("UsuarioLogado.php");
+    }else{
     $mostrar= "Logado como $exibicao ";
+    }
 }
 else{
 $mostrar= "Logado como $exibicao ";
@@ -20,7 +24,7 @@ and open the template in the editor.
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-        <title>Detalhe Album</title>
+        <title>Lista Usuarios</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link href="css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
@@ -77,10 +81,12 @@ and open the template in the editor.
 
         <!-- Three columns of text below the carousel -->
         <div class="row">
-            <div id="centralizar" style="width:90%; margin:auto; height: 70%;">
+            <div id="centralizar" style="width:70%; margin:auto; height: 70%;">
                 <br><br><br><br><br>
-                <label for="login" class="titulo">Detalhes do Álbum </label>
-                <br><br>
+                <label for="login" class="titulo">Lista de Usuários </label>
+                <br><br><br>
+                <a class="btn btn-primary btn-lg" href="NovoUsuario.php">+ Novo Usuário</a>
+                <br><br><br>
                 <?php
                     $host = "localhost";
                     $username = "root";
@@ -91,70 +97,84 @@ and open the template in the editor.
 
                     @mysql_select_db($db) or die("Impossível conectar ao banco"); 
 
-                    $result=mysql_query("SELECT a.id,a.nome,a.ano,a.imagem,ar.nome as artista FROM artista ar, album a"
-                            . " WHERE a.artista=ar.id AND a.id='$acao' ") or die("Impossível executar a query"); 
-                    $arquivos = mysql_fetch_array($result);
-                    $pesquisamusicas=mysql_query("SELECT *from musica WHERE album='$acao'") or die("Impossível executar a query"); 
-                    
-                echo "<div style='width: 1100px; height:600px;'>";
-                echo "<div style='width: 500px; float:left;'>";
-                echo "<h1 class='titulo' style='font-size: 70px;' >";
-                echo $arquivos['nome'];
-                echo "</h1>"; 
-                echo "<h3 style='font-size: 40px;'>";
-                echo $arquivos['artista'];
-                echo "</h3>";
-                echo "<h3 style='font-size: 20px;'>";
-                echo $arquivos['ano'];
-                echo "</h3>";
-                echo "<h1 class='titulo' style='font-size: 35px; float:center; width: 30px; ' >";
-                echo "Faixas";
-                echo "</h1>";
-                echo "</div>";
-                
-                $rows = array();
-                while($row = mysql_fetch_array($pesquisamusicas))
-                    $rows[] = $row;
-                echo "<div style=' width:500px; height:500px; float:right;'>";
-                echo "<img src='img/".$arquivos['imagem']."' height='400' width='400' />";
-                echo "</div>";
-                echo "<div class='table-responsive' style='float:left; width:600px;'>";
-                echo "<table class='table table-striped' style='float:left;'>";
+                    $result=mysql_query("SELECT * FROM usuario WHERE nivel=2") or die("Impossível executar a query"); 
+                    $admins=mysql_query("SELECT * FROM usuario WHERE nivel=1") or die("Impossível executar a query"); 
+                    echo "<div class='table-responsive'>";
+                    echo "<table class='table table-striped' id='table' name='table'>";
                     echo "<thead>";
                     echo "<tr>";
-                    echo   "<th class='frm'>Nº Faixa</th>";
-                    echo   "<th class='frm'>Título</th>";
-                    echo   "<th class='frm'>Duração</th>";
-                    echo   "<th class='frm'>Compositor</th>";
+                    echo   "<th class='frm'>ID</th>";
+                    echo   "<th class='frm'>Nome</th>";
+                    echo   "<th class='frm'>E-mail</th>";
+                    echo   "<th class='frm'>Imagem</th>";
+                    echo   "<th class='frm'>Opções</th>";
                     echo "</tr>";
                     echo "</thead>";
                     echo "<tbody>";
-                foreach($rows as $row){ 
-                    $enumero = stripslashes($row['numero']);
-                    $enome = stripslashes($row['nome']);
-                    $eduracao = stripslashes($row['duracao']);
-                    $ecompositor = stripslashes($row['compositor']);
-                    echo "<tr data-target='#myModal' id='delete-row' data-toggle='modal'>";
-                        echo "<td align='left'>".$enumero."</td>";    
-                        echo "<td align='left' width='1000px'>".$enome."</td>";
-                        echo "<td align='left'>".$eduracao."</td>";
-                        echo "<td align='left' width='1000px'>".$ecompositor."</td>";
+                    while ($arquivos = mysql_fetch_array($result)) {
+                        echo "<tr data-target='#myModal' id='delete-row' data-toggle='modal' data-id=".$arquivos['ID']." onClick=" .$idexcluir. "=".$arquivos['ID']." >";
+                        echo "<td align='left'>".$arquivos['ID']."</td>";    
+                        echo "<td align='left'>".$arquivos['nome']."</td>";
+                        echo "<td align='left'>".$arquivos['email']."</td>";
+                        echo "<td align='left'><img src='img/".$arquivos['imagem']."' height='50' width='50' ></td>";
+                        echo "<td align='left'> <a class='btn btn-warning btn-xs' href='EditarUsuario.php?acao=".$arquivos['ID']."'>Editar</a>  "
+                            . "<a  class='btn btn-danger btn-xs' href='RemoverUsuario.php?acao=".$arquivos['ID']."'>Excluir</a> </td>";
                         echo "</tr>";
-                }
-                echo "</tbody>";
-                echo "</table>";
-                
-                echo "<br><br><br><br>";
-                echo "</div>";
-                echo "</div>";
+                    }
+                    echo "</tbody>";
+                    echo "</table>";
+                    echo "</div>";
+                    echo '<br><br><br>';
+                    
+                    
+                    echo '<label for="login" class="titulo">Lista de Administradores </label>';
+                    echo '<br><br><br>';
+                    echo "<div class='table-responsive'>";
+                    echo "<table class='table table-striped' id='table' name='table'>";
+                    echo "<thead>";
+                    echo "<tr>";
+                    echo   "<th class='frm'>ID</th>";
+                    echo   "<th class='frm'>Nome</th>";
+                    echo   "<th class='frm'>E-mail</th>";
+                    echo   "<th class='frm'>Imagem</th>";
+                    echo   "<th class='frm'>Opções</th>";
+                    echo "</tr>";
+                    echo "</thead>";
+                    echo "<tbody>";
+                    while ($arquivos2 = mysql_fetch_array($admins)) {
+                        echo "<tr data-target='#myModal' id='delete-row' data-toggle='modal' data-id=".$arquivos2['ID']." onClick=" .$idexcluir. "=".$arquivos2['ID']." >";
+                        echo "<td align='left'>".$arquivos2['ID']."</td>";    
+                        echo "<td align='left'>".$arquivos2['nome']."</td>";
+                        echo "<td align='left'>".$arquivos2['email']."</td>";
+                        echo "<td align='left'><img src='img/".$arquivos2['imagem']."' height='50' width='50' ></td>";
+                        echo "<td align='left'> <a class='btn btn-warning btn-xs' href='EditarUsuario.php?acao=".$arquivos2['ID']."'>Editar</a>";
+                        echo "</tr>";
+                    }
+                     
+                    echo "</tbody>";
+                    echo "</table>";
+                    echo "</div>";
                 ?>
+                
+                <br>
+                <div id="bottom" class="row">
+                <div class="col-md-12">
+
+                    <ul class="pagination">
+                        <li class="disabled"><a>&lt; Anterior</a></li>
+                        <li class="disabled"><a>1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
+                    </ul><!-- /.pagination -->
+
+                </div>
+                </div> <!-- /#bottom -->
+                <br>
+                <a class="btn btn-success btn-lg btn-default" href="index.php">Voltar</a>
                 
             </div>
         </div><!-- /.row -->
-        
-        <div style="width: 1000px;">
-        <div style="width: 500px; float: right;"><a  class="btn btn-success btn-lg btn-default" href="ListaAlbunsLogado.php">Voltar</a></div>
-        </div>
         <hr class="featurette-divider">
         <!-- FOOTER -->
         <footer>
@@ -174,7 +194,14 @@ and open the template in the editor.
               <!-- script references -->
                       <script src="js/jquery.js"></script>
                       <script src="js/bootstrap.min.js"></script>
-                      
+                      <script type="text/javascript">
+                        $(document).ready(function() {
+                        $('tr').click(function () { 
+                        var id = $(this).attr("data-id");
+                        $idexcluir = id;
+                        });
+                        });
+                    </script>
     </body>
 </html>
 
