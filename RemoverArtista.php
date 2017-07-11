@@ -1,4 +1,3 @@
-
 <?php
 
 include("controller/header.php");
@@ -41,7 +40,7 @@ and open the template in the editor.
 
         <meta charset="utf-8">
 
-        <title>Remover Artista</title>
+        <title>Remover Artista/Banda</title>
 
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -52,6 +51,8 @@ and open the template in the editor.
         <link href="css/bootstrap-social.css" rel="stylesheet" >
 
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        
+        <link rel="shortcut icon" href="img/speaker.ico" >
 
     </head>
 
@@ -147,7 +148,7 @@ and open the template in the editor.
 
       
 
-        <div class="container marketing"  id="fundo" style=" width:90%; height: 150px;">
+        <div class="container marketing"  id="fundo" style=" height: 150px;">
 
         <!-- Three columns of text below the carousel -->
 
@@ -183,9 +184,7 @@ and open the template in the editor.
 
                     $arquivos = mysql_fetch_array($result);
 
-                echo "<div style='width: 1100px; height:500px;>";
-
-                echo "<div style='width: 1100px;'>";
+                echo "<div style='height=600px; width=1300px;'>";
 
                 echo "<h1 class='titulo' style='font-size: 40px;' >";
 
@@ -201,10 +200,11 @@ and open the template in the editor.
 
                 echo "</h3>";
 
-                echo "<div style=' width:1100px; height:300px;'>";
+                echo "<div style=' width:700; height:300px;'>";
 
                 echo "<img src='img/".$arquivos['imagem']."' height='300' width='300' />";
 
+                echo "</div>";
                 echo "</div>";
 
                 ?>
@@ -222,7 +222,6 @@ and open the template in the editor.
             </div>
 
             
-
         </div><!-- /.row -->
 
         <hr class="featurette-divider">

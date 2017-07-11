@@ -1,4 +1,3 @@
-
 <?php
 
     include("controller/header.php");
@@ -47,7 +46,7 @@ and open the template in the editor.
 
         <meta charset="utf-8">
 
-        <title>Detalhe Artista</title>
+        <title>Detalhes do Artista/Banda</title>
 
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -58,6 +57,8 @@ and open the template in the editor.
         <link href="css/bootstrap-social.css" rel="stylesheet" >
 
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        
+        <link rel="shortcut icon" href="img/speaker.ico" >
 
     </head>
 

@@ -1,4 +1,3 @@
-
 <?php
 
 include("controller/header.php");
@@ -41,7 +40,7 @@ and open the template in the editor.
 
         <meta charset="utf-8">
 
-        <title>Inserir Album</title>
+        <title>Novo Álbum</title>
 
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -52,6 +51,8 @@ and open the template in the editor.
         <link href="css/bootstrap-social.css" rel="stylesheet" >
 
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        
+        <link rel="shortcut icon" href="img/speaker.ico" >
 
     </head>
 
@@ -177,7 +178,7 @@ and open the template in the editor.
 
                 <div class="frm">
 
-                    <label for="nome">Nome: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="album" value=""/>
+                    <label for="nome">Nome: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="album" value="<?=(isset($_POST['album']))? $_POST['album'] : ''?>" />
 
                 </div>
 
@@ -205,7 +206,7 @@ and open the template in the editor.
 
                             $artista = stripslashes($row['nome']);
 
-                        echo '<option>'.$artista.'</option>';
+                        echo "<option value='$artista'"; if(isset($_POST['artista']) && $_POST['artista']==$artista) { echo "selected='selected'>$artista</option>";} else {echo ">$artista</option>";}
 
                                 }
 
@@ -227,7 +228,7 @@ and open the template in the editor.
 
                             for ($i = 2017; $i > 1899; $i--) {
 
-                                echo "<option value=$i>$i</option>";
+                                echo "<option value='$i'"; if(isset($_POST['ano']) && $_POST['ano']==$i) { echo "selected='selected'>$i</option>";} else {echo ">$i</option>";}
 
                             }
 
@@ -247,7 +248,7 @@ and open the template in the editor.
 
                     <br><br>
 
-                    <a class=" btn btn-primary" onclick="MostrarDiv('esconder');">+ Adicionar Músicas</a>
+                    <a class=" btn btn-primary" href='#direcionar' onclick="MostrarDiv('esconder');">+ Adicionar Músicas</a>
 
                     
 
@@ -268,12 +269,12 @@ and open the template in the editor.
                     </script>
 
                     <br><br><br>
-
+                <a name="direcionar"></a>
                 <div id="esconder" style="display: none">
 
                 <div class="frm">
 
-                    <label for="imagem">Músicas: (Insira no máximo 21 faixas)
+                    <label for="imagem">Músicas: (Insira no máximo 30 faixas)
 
                 </div>  
 
@@ -293,7 +294,7 @@ and open the template in the editor.
 
                     <div class="frm" style="float:left; width: 1000px;">
 
-                        <input type="number"  name="numero[]" style="width: 80px;float:left;" class="form-control mb-2 mr-sm-2 mb-sm-0" min="1" max="30">
+                        <input type="text"  name="numero[]" style="width: 80px;float:left;" class="form-control mb-2 mr-sm-2 mb-sm-0" readonly="readonly" value="1">
 
                         <input  name="nome[]" style="width: 190px;float:left;" class="form-control mb-2 mr-sm-2 mb-sm-0" type="text"  value=""/>
 
@@ -387,7 +388,7 @@ and open the template in the editor.
 
                       <script type="text/javascript">
 
-                        var max_fields      = 21; 
+                        var max_fields      = 30; 
 
                         var wrapper                   = $(".input_fields_wrap");
 
@@ -406,7 +407,7 @@ and open the template in the editor.
 
                                         $(wrapper).append('<div class="frm" style="float:left; width: 1000px;" >'
 
-                          +'<input type="number"  name="numero[]" style="width: 80px;float:left;" class="form-control mb-2 mr-sm-2 mb-sm-0" min="1" max="30">'
+                          +'<input type="text"  name="numero[]" readonly="readonly" style="width: 80px;float:left;" class="form-control mb-2 mr-sm-2 mb-sm-0" value="'+x+'">'
 
                             +'<input  name="nome[]" style="width: 190px;float:left;" class="form-control mb-2 mr-sm-2 mb-sm-0" type="text"  value=""/>'
 

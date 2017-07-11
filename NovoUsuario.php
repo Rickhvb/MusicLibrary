@@ -24,12 +24,13 @@ and open the template in the editor.
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-        <title>Novo Usuario</title>
+        <title>Novo Usuário</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link href="css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
         <link href="css/bootstrap-social.css" rel="stylesheet" >
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        <link rel="shortcut icon" href="img/speaker.ico" >
     </head>
     <body id="fundo">
         

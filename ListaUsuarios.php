@@ -1,4 +1,3 @@
-
 <?php
 
 include("controller/header.php");
@@ -51,7 +50,7 @@ and open the template in the editor.
 
         <meta charset="utf-8">
 
-        <title>Lista Usuarios</title>
+        <title>Lista de Usuários</title>
 
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -62,6 +61,8 @@ and open the template in the editor.
         <link href="css/bootstrap-social.css" rel="stylesheet" >
 
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        
+        <link rel="shortcut icon" href="img/speaker.ico" >
 
     </head>
 
@@ -177,10 +178,12 @@ and open the template in the editor.
 
                 <?php
 
-                    $result=mysql_query("SELECT * FROM usuario WHERE nivel=2") or die("Impossível executar a query"); 
-
+                    $usuarios=mysql_query("SELECT * FROM usuario WHERE nivel=2") or die("Impossível executar a query"); 
+                    $superadmin=mysql_query("SELECT * FROM usuario WHERE nivel=0") or die("Impossível executar a query"); 
                     $admins=mysql_query("SELECT * FROM usuario WHERE nivel=1") or die("Impossível executar a query"); 
-
+                    $contarusuario=mysql_num_rows($usuarios);
+                    $contaradmin=mysql_num_rows($admins);
+                    if ($contarusuario > 0){
                     echo "<div class='table-responsive'>";
 
                     echo "<table class='table table-striped' id='table' name='table'>";
@@ -205,7 +208,7 @@ and open the template in the editor.
 
                     echo "<tbody>";
 
-                    while ($arquivos = mysql_fetch_array($result)) {
+                    while ($arquivos = mysql_fetch_array($usuarios)) {
 
                         echo "<tr data-target='#myModal' id='delete-row' data-toggle='modal' data-id=".$arquivos['ID']." onClick=" .$idexcluir. "=".$arquivos['ID']." >";
 
@@ -230,15 +233,15 @@ and open the template in the editor.
                     echo "</table>";
 
                     echo "</div>";
+                    }else{
+                        echo '<h3 for="login">Sem usuários para exibir. </h3>';
+                    }
 
                     echo '<br><br><br>';
 
-                    
-
-                    
-
                     echo '<label for="login" class="titulo">Lista de Administradores </label>';
-
+                    if ($contaradmin > 0){
+                    
                     echo '<br><br><br>';
 
                     echo "<div class='table-responsive'>";
@@ -277,54 +280,84 @@ and open the template in the editor.
 
                         echo "<td align='left'><img src='img/".$arquivos2['imagem']."' height='50' width='50' ></td>";
 
-                        echo "<td align='left'> <a class='btn btn-warning btn-xs' href='EditarUsuario.php?acao=".$arquivos2['ID']."'>Editar</a>";
+                        echo "<td align='left'> <a class='btn btn-warning btn-xs' href='EditarUsuario.php?acao=".$arquivos2['ID']."'>Editar</a> "
+                                
+                        . "<a  class='btn btn-danger btn-xs' href='RemoverUsuario.php?acao=".$arquivos2['ID']."'>Excluir</a> </td>";
 
                         echo "</tr>";
 
                     }
 
-                     
 
                     echo "</tbody>";
 
                     echo "</table>";
 
                     echo "</div>";
+                    }else{
+                        echo '<h3 for="login">Sem administradores para exibir. </h3>';
+                    }
+                    echo '<br><br><br>';
 
+                    
+
+                    echo '<label for="login" class="titulo">Super Admin </label>';
+
+                    echo '<br><br><br>';
+
+                    echo "<div class='table-responsive'>";
+
+                    echo "<table class='table table-striped' id='table' name='table'>";
+
+                    echo "<thead>";
+
+                    echo "<tr>";
+
+                    echo   "<th class='frm'>ID</th>";
+
+                    echo   "<th class='frm'>Nome</th>";
+
+                    echo   "<th class='frm'>E-mail</th>";
+
+                    echo   "<th class='frm'>Imagem</th>";
+
+                    echo "</tr>";
+
+                    echo "</thead>";
+
+                    echo "<tbody>";
+
+                    while ($arquivos3 = mysql_fetch_array($superadmin)) {
+
+                        echo "<tr data-target='#myModal' id='delete-row' data-toggle='modal' data-id=".$arquivos3['ID']." onClick=" .$idexcluir. "=".$arquivos3['ID']." >";
+
+                        echo "<td align='left'>".$arquivos3['ID']."</td>";    
+
+                        echo "<td align='left'>".$arquivos3['nome']."</td>";
+
+                        echo "<td align='left'>".$arquivos3['email']."</td>";
+
+                        echo "<td align='left'><img src='img/".$arquivos3['imagem']."' height='50' width='50' ></td>";
+
+                        echo "</tr>";
+
+                    }
+
+
+                    echo "</tbody>";
+
+                    echo "</table>";
+
+                    echo "</div>";
                 ?>
 
-                
-
                 <br>
-
-                <div id="bottom" class="row">
-
-                <div class="col-md-12">
-
-                    <ul class="pagination">
-
-                        <li class="disabled"><a>&lt; Anterior</a></li>
-
-                        <li class="disabled"><a>1</a></li>
-
-                        <li><a href="#">2</a></li>
-
-                        <li><a href="#">3</a></li>
-
-                        <li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
-
-                    </ul><!-- /.pagination -->
-
-                </div>
-
-                </div> <!-- /#bottom -->
 
                 <br>
 
                 <a class="btn btn-success btn-lg btn-default" href="index.php">Voltar</a>
 
                 
-
             </div>
 
         </div><!-- /.row -->

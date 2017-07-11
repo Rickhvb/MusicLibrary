@@ -1,4 +1,3 @@
-
 <?php
 
 include("controller/header.php");
@@ -41,7 +40,7 @@ and open the template in the editor.
 
         <meta charset="utf-8">
 
-        <title>Editar Album</title>
+        <title>Editar Álbum</title>
 
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -52,6 +51,8 @@ and open the template in the editor.
         <link href="css/bootstrap-social.css" rel="stylesheet" >
 
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        
+        <link rel="shortcut icon" href="img/speaker.ico" >
 
     </head>
 
@@ -333,7 +334,7 @@ and open the template in the editor.
 
                 echo "<div>";
 
-                echo '<a class=" btn btn-primary btn-lg" onclick=MostrarDivEesconderExcluir("esconder2")>+ Adicionar Músicas</a>';
+                echo '<a class=" btn btn-primary btn-lg"  href="#direcionar2" onclick=MostrarDivEesconderExcluir("esconder2")>+ Adicionar Músicas</a>';
 
                 echo '</div>';
 
@@ -388,7 +389,7 @@ and open the template in the editor.
                 echo "<br><br><br>";
 
                 echo '</div>';
-
+                echo '<a name="direcionar2"></a>';
                 echo   "<div id='esconder2' style='display:none; margin:0px; padding:0px; border:0px;'>";
 
                 echo "<br>";
@@ -409,13 +410,13 @@ and open the template in the editor.
 
                 echo '<div class="frm" style="float:left; width: 1000px; margin:0px; padding:0px; border:0px;">';
 
-                echo '<input id="numeroadicionar" type="number"  name="numero[]" style="width: 100px;float:left;" class="form-control mb-2 mr-sm-2 mb-sm-0" min="1" max="30">';
+                echo '<input id="numeroadicionar" type="number"  name="numero" style="width: 100px;float:left;" class="form-control mb-2 mr-sm-2 mb-sm-0" min="1" max="30">';
 
-                echo '<input  id="nomeadicionar" name="nome[]" style="width: 270px;float:left;" class="form-control mb-2 mr-sm-2 mb-sm-0" type="text"  value=""/>';
+                echo '<input  id="nomeadicionar" name="nome" style="width: 270px;float:left;" class="form-control mb-2 mr-sm-2 mb-sm-0" type="text"  value=""/>';
 
-                echo '<input  name="duracao[]" style="width: 100px;float:left;" class="form-control mb-2 mr-sm-2 mb-sm-0" type="time" maxlength="5" value="" id="duracaoadicionar"/>';
+                echo '<input  name="duracao" style="width: 100px;float:left;" class="form-control mb-2 mr-sm-2 mb-sm-0" type="time" maxlength="5" value="" id="duracaoadicionar"/>';
 
-                echo "<input  id='compositoradicionar' name='compositor[]' style='width: 200px;float:left;' class='form-control mb-2 mr-sm-2 mb-sm-0' type='text'  value=''/>  "
+                echo "<input  id='compositoradicionar' name='compositor' style='width: 200px;float:left;' class='form-control mb-2 mr-sm-2 mb-sm-0' type='text'  value=''/>  "
 
                      . " ";
 

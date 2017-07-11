@@ -1,4 +1,3 @@
-
 <?php
 
 include("controller/header.php");
@@ -43,7 +42,7 @@ and open the template in the editor.
 
         <meta charset="utf-8">
 
-        <title>Lista Albuns</title>
+        <title>Lista de Álbuns</title>
 
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -54,6 +53,8 @@ and open the template in the editor.
         <link href="css/bootstrap-social.css" rel="stylesheet" >
 
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        
+        <link rel="shortcut icon" href="img/speaker.ico" >
 
     </head>
 
@@ -164,7 +165,11 @@ and open the template in the editor.
                 <?php
 
                     $result=mysql_query("SELECT a.id,a.nome,ar.nome as artista,a.ano,a.imagem FROM album a, artista ar WHERE ar.id=a.artista") or die("Impossível executar a query"); 
-
+                    $contaralbuns=mysql_num_rows($result);
+                    if ($contaralbuns == 0){
+                        echo '<h3 for="login">Sem álbuns para exibir. </h3>';
+                    }
+                    else {
                     echo "<div class='table-responsive'>";
 
                     echo "<table class='table table-striped'>";
@@ -222,39 +227,16 @@ and open the template in the editor.
                     echo "</table>";
 
                     echo "</div>";
-
+                    }
                 ?>
 
                 <br>
-
-                <div id="bottom" class="row">
-
-                <div class="col-md-12">
-
-                    <ul class="pagination">
-
-                        <li class="disabled"><a>&lt; Anterior</a></li>
-
-                        <li class="disabled"><a>1</a></li>
-
-                        <li><a href="#">2</a></li>
-
-                        <li><a href="#">3</a></li>
-
-                        <li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
-
-                    </ul><!-- /.pagination -->
-
-                </div>
-
-                </div> <!-- /#bottom -->
 
                 <br>
 
                 <a class="btn btn-success btn-lg btn-default" href="index.php">Voltar</a>
 
                 
-
             </div>
 
         </div><!-- /.row -->

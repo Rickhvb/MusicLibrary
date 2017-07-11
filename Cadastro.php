@@ -30,6 +30,7 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
         <link href="css/bootstrap-social.css" rel="stylesheet" >
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        <link rel="shortcut icon" href="img/speaker.ico" >
     </head>
     <body id="fundo">
         
@@ -94,20 +95,20 @@ and open the template in the editor.
             <br>
                 <form action="?acao=cadastrar" method="post" enctype="multipart/form-data" >
                 <div class="frm">
-                    <label for="nome">Nome: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="nome" value=""/>
+                    <label for="nome">Nome: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="nome" value="<?=(isset($_POST['nome']))? $_POST['nome'] : ''?>" />
                 </div>
                 <div class="frm">
-                    <label for="email">E-mail: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="email" value=""/>
+                    <label for="email">E-mail: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="email" value="<?=(isset($_POST['email']))? $_POST['email'] : ''?>" />
                 </div>
                 <div class="frm">
-                    <label for="senha">Senha: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="password" name="senha" value=""/>
+                    <label for="senha">Senha: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="password" name="senha" value="<?=(isset($_POST['senha']))? $_POST['senha'] : ''?>" />
                 </div>
                 <div class="frm">
-                    <label for="senha2">Confirme a Senha: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="password" name="senha2" value=""/>
+                    <label for="senha2">Confirme a Senha: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="password" name="senha2" value="<?=(isset($_POST['senha2']))? $_POST['senha2'] : ''?>" />
                 </div>
                 <div class="frm">
                     <input type="hidden" name="size" value="1000000">
-                    <label for="imagem">Imagem: </label><input type="file" id="diretorio" name="imagem"/>
+                    <label for="imagem">Imagem: </label><input type="file" id="diretorio" name="imagem" value="<?=(isset($_POST['imagem']))? $_POST['imagem'] : ''?>" />
                 </div>
                     <br>
                 <div class="frm">

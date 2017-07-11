@@ -17,6 +17,12 @@
                 $conectar=new Operacoes;
                 $conectar=$conectar->cadastrarArtistaComFoto($nome,$genero,$descricao,$imagem);
                 $msg = $conectar;
+                if ($msg == "Cadastro realizado com sucesso!"){
+                    echo '<script>';
+                    echo 'alert("Artista/Banda Cadastrado com Sucesso!");';
+                    echo 'window.location="index.php";';
+                    echo '</script>';
+                }
                 if(move_uploaded_file($_FILES['imagem']['tmp_name'], $target)){
                     $message="Imagem salva.";
                 }else{
@@ -28,6 +34,12 @@
                 $conectar=new Operacoes;
                 $conectar=$conectar->cadastrarArtistaSemFoto($nome,$genero,$descricao);
                 $msg = $conectar;
+                if ($msg == "Cadastro realizado com sucesso!"){
+                    echo '<script>';
+                    echo 'alert("Artista/Banda Cadastrado com Sucesso!");';
+                    echo 'window.location="index.php";';
+                    echo '</script>';
+                }
             }
         }
 }
@@ -41,6 +53,7 @@
         $target = "img/".basename($_FILES['imagem']['name']);
         $imagem = $_FILES['imagem']['name'];
         if(empty($nome) || empty($genero) || empty($descricao)){
+            $acao=$id;
             $msg="Nome do Artista/Banda, Gênero e Descrição são obrigatórios!";
         }
         //Todos os campos preenchidos
@@ -50,6 +63,13 @@
                 $conectar=new Operacoes;
                 $conectar=$conectar->atualizarArtistaComFoto($id,$nome,$genero,$descricao,$imagem);
                 $msg = $conectar;
+                if ($msg == "Artista atualizado com sucesso!"){
+                    echo '<script>';
+                    echo 'alert("Artista/Banda atualizado com Sucesso!");';
+                    echo 'window.location="ListaArtistasLogado.php";';
+                    echo '</script>';
+                }
+                $acao=$id;
                 if(move_uploaded_file($_FILES['imagem']['tmp_name'], $target)){
                     $message="Imagem salva.";
                 }else{
@@ -61,6 +81,13 @@
                 $conectar=new Operacoes;
                 $conectar=$conectar->atualizarArtistaSemFoto($id,$nome,$genero,$descricao);
                 $msg = $conectar;
+                if ($msg == "Artista atualizado com sucesso!"){
+                    echo '<script>';
+                    echo 'alert("Artista/Banda atualizado com Sucesso!");';
+                    echo 'window.location="ListaArtistasLogado.php";';
+                    echo '</script>';
+                }
+                $acao=$id;
             }
         }
 }
@@ -71,4 +98,8 @@
         $conectar=new Operacoes;
         $conectar=$conectar->removerArtista($artista);
         $msg = $conectar;
+        echo '<script>';
+        echo 'alert("Artista/Banda removido com Sucesso!");';
+        echo 'window.location="ListaArtistasLogado.php";';
+        echo '</script>';
 }

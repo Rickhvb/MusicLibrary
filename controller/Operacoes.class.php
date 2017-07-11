@@ -414,10 +414,18 @@ class Operacoes{
         //Tratamento das variáveis
 
         $nome=ucwords(strtolower($nome));
+        $validarnome=mysql_query("SELECT *FROM artista WHERE nome='$nome' AND NOT id='$id'");
+        $contar=mysql_num_rows($validarnome);
+
+        if($contar==0){
 
         $insert=mysql_query("UPDATE artista SET nome='$nome',genero='$genero',descricao='$descricao',imagem='$imagem' WHERE id='$id'");
+        }
+        else{
 
-        
+            $flash="Artista já cadastrado.";
+
+        }
 
         if(isset($insert)){
 
@@ -446,9 +454,18 @@ class Operacoes{
         //Tratamento das variáveis
 
         $nome=ucwords(strtolower($nome));
+        $validarnome=mysql_query("SELECT *FROM artista WHERE nome='$nome' AND NOT id='$id'");
+        $contar=mysql_num_rows($validarnome);
+
+        if($contar==0){
 
         $insert=mysql_query("UPDATE artista SET nome='$nome',genero='$genero',descricao='$descricao' WHERE id='$id'");
+        }
+        else{
 
+            $flash="Artista já cadastrado.";
+
+        }
         
 
         if(isset($insert)){
@@ -935,44 +952,44 @@ class Operacoes{
 
             }catch(Exception $e){
 
-            
-
         }
 
     }
 
     
-
     //Funçao que conecta com o banco e cadastra uma música
 
         public function inserirMusica($id){ 
 
         try{
-
-            $sql = "INSERT INTO musica (numero,nome,duracao,compositor,album) VALUES";
-
-            $data = $_POST;
-
-            foreach( $data['numero'] as $k => $v ){
-
-            $sql .= PHP_EOL . "('" . $v . "','" . $data['nome'][$k] . "','00:" . $data['duracao'][$k] . "','" . $data['compositor'][$k] . "','" . $id . "')";
-
-            $sql .= ",";
-
-            }
-
-            $sql = substr_replace($sql, ';', -1);
+            $nome = $_POST["nome"];
+            $numero = $_POST["numero"];
+            $duracao = $_POST["duracao"];
+            $compositor = $_POST["compositor"];
+            $sql = "INSERT INTO musica (numero,nome,duracao,compositor,album) VALUES ('$numero','$nome','$duracao','$compositor','$id')";
 
             mysql_query($sql);
-
-            }catch(Exception $e){
-
             
+            }catch(Exception $e){
 
         }
 
     }
 
+    public function procurarmusicas($id,$musica){
+        $contar = 0;
+        try{
+
+            $sql = mysql_query("SELECT *FROM musica WHERE album='$id' and numero='$musica'");
+            
+            }catch(Exception $e){
+        }
+        $contarmusicas=mysql_num_rows($sql);
+        if ($contarmusicas>0){
+            $contar = 1;
+        }
+        return $contar;
+    }
     
 
     //Funçao que conecta com o banco e exclui uma música
@@ -986,8 +1003,6 @@ class Operacoes{
             mysql_query($sql);
 
             }catch(Exception $e){
-
-            
 
         }
 
@@ -1013,11 +1028,13 @@ class Operacoes{
 
     public function logarAdmin($email,$senha){
 
-            $buscar=mysql_query("SELECT *FROM usuario WHERE email='$email' AND senha='$senha' AND nivel='1' LIMIT 1");
+            $buscar=mysql_query("SELECT *FROM usuario WHERE email='$email' AND senha='$senha' AND  NOT nivel='2' LIMIT 1");
 
             if(mysql_num_rows($buscar)==1){
 
                 $dados=mysql_fetch_array($buscar);
+                
+                $_SESSION["id"]=$dados["ID"];
 
                 $_SESSION["email"]=$dados["email"];
 

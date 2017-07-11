@@ -1,4 +1,3 @@
-
 <?php
 
 include("controller/header.php");
@@ -43,7 +42,7 @@ and open the template in the editor.
 
         <meta charset="utf-8">
 
-        <title>Resultado da Busca</title>
+        <title>Resultados da Busca</title>
 
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -54,6 +53,8 @@ and open the template in the editor.
         <link href="css/bootstrap-social.css" rel="stylesheet" >
 
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        
+        <link rel="shortcut icon" href="img/speaker.ico" >
 
     </head>
 
@@ -163,7 +164,7 @@ and open the template in the editor.
 
                 $palavra=$_POST["pesquisa"];
 
-                echo '<label for="login" class="titulo">Resultado da sua Busca pela palavra "'.$palavra.'" </label>';
+                echo '<label for="login" class="titulo">Resultado da busca pela palavra "'.$palavra.'" </label>';
 
                 echo '<br><br><br>';
 
@@ -185,6 +186,9 @@ and open the template in the editor.
 
                     $contarartista=mysql_num_rows($pesquisaartista);
 
+                    if ($contarmusica == 0 && $contaralbum == 0 && $contarartista == 0){
+                        echo '<h3 for="login">Sua busca não retornou nenhum resultado. </h3>';
+                    }
                     if($contarmusica>0){
 
                         echo '<label for="login" class="titulo">Músicas </label>';
@@ -383,38 +387,11 @@ and open the template in the editor.
 
                 ?>
 
-                
-
-                <br>
-
-                <div id="bottom" class="row">
-
-                <div class="col-md-12">
-
-                    <ul class="pagination">
-
-                        <li class="disabled"><a>&lt; Anterior</a></li>
-
-                        <li class="disabled"><a>1</a></li>
-
-                        <li><a href="#">2</a></li>
-
-                        <li><a href="#">3</a></li>
-
-                        <li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
-
-                    </ul><!-- /.pagination -->
-
-                </div>
-
-                </div> <!-- /#bottom -->
-
                 <br>
 
                 <a class="btn btn-success btn-lg btn-default" href="index.php">Voltar</a>
 
                 
-
             </div>
 
         </div><!-- /.row -->

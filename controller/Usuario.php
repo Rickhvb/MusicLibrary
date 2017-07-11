@@ -58,6 +58,12 @@
                         $conectar=$conectar->cadastrarUsuarioComFoto($nome,$email,$senha,$imagem);
 
                         $msg = $conectar;
+                            if ($msg == "Cadastro realizado com sucesso!"){
+                            echo '<script>';
+                            echo 'alert("Usuário Cadastrado com Sucesso!\nFaça seu login!");';
+                            echo 'window.location="index.php";';
+                            echo '</script>';
+                        }
 
                         if(move_uploaded_file($_FILES['imagem']['tmp_name'], $target)){
 
@@ -80,6 +86,12 @@
                         $conectar=$conectar->cadastrarUsuarioSemFoto($nome,$email,$senha);
 
                         $msg = $conectar;
+                            if ($msg == "Cadastro realizado com sucesso!"){
+                            echo '<script>';
+                            echo 'alert("Usuário Cadastrado com Sucesso!\nFaça seu login!");';
+                            echo 'window.location="index.php";';
+                            echo '</script>';
+                        }
 
                     }
 
@@ -161,11 +173,11 @@ if($startaction==1 && $acao=="cadastrarUsuario"){
 
                         $conectar=new Operacoes;
 
-                        if ($nivel="Administrador"){
+                        if ($nivel=="Administrador"){
 
                             $nivel=1;
 
-                        }else{
+                        }else if ($nivel=="Usuário Comum"){
 
                             $nivel=2;
 
@@ -174,9 +186,13 @@ if($startaction==1 && $acao=="cadastrarUsuario"){
                         if (!empty($imagem)){
 
                         $conectar=$conectar->cadastrarUsuarioAdminComFoto($nome,$email,$senha,$imagem,$nivel);
-
                         $msg = $conectar;
-
+                        if ($msg == "Cadastro realizado com sucesso!"){
+                            echo '<script>';
+                            echo 'alert("Usuário Cadastrado com Sucesso!");';
+                            echo 'window.location="ListaUsuarios.php";';
+                            echo '</script>';
+                        }
                         if(move_uploaded_file($_FILES['imagem']['tmp_name'], $target)){
 
                             $message="Imagem salva.";
@@ -192,8 +208,13 @@ if($startaction==1 && $acao=="cadastrarUsuario"){
                         else{
 
                             $conectar=$conectar->cadastrarUsuarioAdminSemFoto($nome,$email,$senha,$nivel);
-
                             $msg = $conectar;
+                            if ($msg == "Cadastro realizado com sucesso!"){
+                                echo '<script>';
+                                echo 'alert("Usuário Cadastrado com Sucesso!");';
+                                echo 'window.location="ListaUsuarios.php";';
+                                echo '</script>';
+                        }
 
                         }
 
@@ -231,7 +252,7 @@ if(isset($_SESSION["nome"])){
 
     $exibicao=$_SESSION["nome"];
 
-    if($_SESSION["nivel"]==1){
+    if($_SESSION["nivel"]==1 || $_SESSION["nivel"]==0){
 
         $nivel="admin";
 
@@ -272,9 +293,9 @@ else{
         $imagem = $_FILES['imagem']['name'];
 
         if(empty($nome) || empty($email) || empty($senha) || empty($nivel)){
-
+            $acao=$id;
             $msg="Nome, E-mail e Senha são obrigatórios!";
-
+            
         }
 
         //Todos os campos preenchidos
@@ -292,7 +313,7 @@ else{
                     //Senha inválida
 
                     if(strlen($senha)<4){
-
+                        $acao=$id;
                         $msg="Senha deve ter no mínimo 4 caracteres!";
 
                     }
@@ -316,11 +337,34 @@ else{
                         }
 
                         if (!empty($imagem)){
-
-                        $conectar=$conectar->editarUsuarioComFoto($id,$nome,$email,$senha,$imagem,$nivel);
-
-                        $msg = $conectar;
-
+                        $idusuario = $_SESSION["id"];
+                        $conectar=new Operacoes;
+                        if ($id==$idusuario && $nivel == 2){
+                            $conectar=$conectar->editarUsuarioComFoto($id,$nome,$email,$senha,$imagem,$nivel);
+                            $msg = $conectar;
+                            if ($msg == "Usuário atualizado com sucesso!"){
+                                echo '<script>';
+                                echo 'alert("Usuário atualizado com Sucesso!");';
+                                echo 'window.location="index.php?acao=logout";';
+                                echo '</script>';
+                            }else {
+                                $acao=$id;
+                            }
+                           
+                        }else{
+                           $conectar=$conectar->editarUsuarioComFoto($id,$nome,$email,$senha,$imagem,$nivel);
+                           $msg = $conectar;
+                            if ($msg == "Usuário atualizado com sucesso!"){
+                                echo '<script>';
+                                echo 'alert("Usuário atualizado com Sucesso!");';
+                                echo 'window.location="ListaUsuarios.php";';
+                                echo '</script>';
+                            }else {
+                                $acao=$id;
+                            }
+                           
+                        }
+                        
                         if(move_uploaded_file($_FILES['imagem']['tmp_name'], $target)){
 
                             $message="Imagem salva.";
@@ -334,10 +378,31 @@ else{
                         }
 
                         else{
-
-                            $conectar=$conectar->editarUsuarioSemFoto($id,$nome,$email,$senha,$nivel);
-
-                            $msg = $conectar;
+                            $idusuario = $_SESSION["id"];
+                            $conectar=new Operacoes;
+                            if ($id==$idusuario && $nivel == 2){
+                                $conectar=$conectar->editarUsuarioSemFoto($id,$nome,$email,$senha,$nivel);
+                                $msg = $conectar;
+                                if ($msg == "Usuário atualizado com sucesso!"){
+                                    echo '<script>';
+                                    echo 'alert("Usuário atualizado com Sucesso!");';
+                                    echo 'window.location="index.php?acao=logout";';
+                                    echo '</script>';
+                                }else {
+                                    $acao=$id;
+                            }
+                            }else{
+                               $conectar=$conectar->editarUsuarioSemFoto($id,$nome,$email,$senha,$nivel);
+                               $msg = $conectar;
+                               if ($msg == "Usuário atualizado com sucesso!"){
+                                    echo '<script>';
+                                    echo 'alert("Usuário atualizado com Sucesso!");';
+                                    echo 'window.location="ListaUsuarios.php";';
+                                    echo '</script>';
+                                }else {
+                                    $acao=$id;
+                                }
+                            }
 
                         }
 
@@ -348,7 +413,7 @@ else{
                 //Senhas diferentes
 
                 else{
-
+                    $acao=$id;
                     $msg="As senhas devem ser iguais!";
 
                 }
@@ -394,15 +459,23 @@ $usuario=null;
  //Remove um usuário
 
  if($startaction==1 && $acao=="removerUsuario"){
-
+        $idusuario = $_SESSION["id"];
         $usuario=$_POST["id"];
-
         $conectar=new Operacoes;
-
-        $conectar=$conectar->excluirUsuario($usuario);
-
-        $msg = $conectar;
-
+        if ($usuario==$idusuario){
+            $conectar=$conectar->excluirUsuario($usuario);
+            echo '<script>';
+            echo 'alert("Usuário removido com Sucesso!");';
+            echo 'window.location="index.php?acao=logout";';
+            echo '</script>';
+        }else{
+           $conectar=$conectar->excluirUsuario($usuario); 
+           echo '<script>';
+           echo 'alert("Usuário removido com Sucesso!");';
+           echo 'window.location="ListaUsuarios.php";';
+           echo '</script>';
+        }
+        
 }
 
  
@@ -505,7 +578,7 @@ $usuario=null;
 
         setcookie("logado","");
 
-        unset($_SESSION["email"],$_SESSION["senha"],$_SESSION["nivel"],$_SESSION["nome"]);
+        unset($_SESSION["email"],$_SESSION["senha"],$_SESSION["nivel"],$_SESSION["nome"], $_SESSION["id"]);
 
         header("Location:index.php");
 

@@ -19,12 +19,13 @@ and open the template in the editor.
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-        <title>Inserir Artista</title>
+        <title>Novo Artista/Banda</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link href="css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
         <link href="css/bootstrap-social.css" rel="stylesheet" >
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        <link rel="shortcut icon" href="img/speaker.ico" >
     </head>
     <body id="fundo">
         
@@ -87,17 +88,17 @@ and open the template in the editor.
             <br>
                 <form action="?acao=cadastrarArtista" method="post" enctype="multipart/form-data" >
                 <div class="frm">
-                    <label for="nome">Nome: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="nome" value=""/>
+                    <label for="nome">Nome: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="nome" value="<?=(isset($_POST['nome']))? $_POST['nome'] : ''?>" />
                 </div>
                 <div class="frm">
-                    <label for="genero">Gênero: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="genero" value=""/>
+                    <label for="genero">Gênero: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="genero" value="<?=(isset($_POST['genero']))? $_POST['genero'] : ''?>" />
                 </div>
                 <div class="frm">
                     <input type="hidden" name="size" value="1000000">
                     <label for="imagem">Imagem: </label><input type="file" id="diretorio" name="imagem"/>
                 </div>
                 <div class="frm">
-                    <label for="descricao">Descrição: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" rows="5" cols="40" name="descricao" placeholder="Descrição do seu artista/banda..." value="">
+                    <label for="descricao">Descrição: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" rows="5" cols="40" name="descricao" placeholder="Descrição do seu artista/banda..." value="<?=(isset($_POST['descricao']))? $_POST['descricao'] : ''?>" />
                 </div>
                     <br>
                 <div class="frm">

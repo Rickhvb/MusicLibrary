@@ -24,12 +24,13 @@ and open the template in the editor.
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-        <title>Login Admin</title>
+        <title>Login Administrador</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link href="css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
         <link href="css/bootstrap-social.css" rel="stylesheet" >
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        <link rel="shortcut icon" href="img/speaker.ico" >
     </head>
     <body id="fundo">
         
@@ -93,10 +94,10 @@ and open the template in the editor.
             <br>
                 <form action="?acao=logarAdmin" method="post" >
                 <div class="frm">
-                    <label for="email">E-mail: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="email" value=""/>
+                    <label for="email">E-mail: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="email" value="<?=(isset($_POST['email']))? $_POST['email'] : ''?>" /> 
                 </div>
                 <div class="frm">
-                    <label for="senha">Senha: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="password" name="senha" value=""/>
+                    <label for="senha">Senha: </label><input class="form-control mb-2 mr-sm-2 mb-sm-0" type="password" name="senha" value="<?=(isset($_POST['senha']))? $_POST['senha'] : ''?>" />
                 </div>
                 <div class="frm">
                     <input class="btn btn-success btn-lg btn-default" type="submit" value="Entrar"/>
